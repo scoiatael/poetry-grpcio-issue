@@ -1,0 +1,112 @@
+Sending build context to Docker daemon  66.56kB
+Step 1/6 : FROM python:3.6
+ ---> e0373ff33a19
+Step 2/6 : ENV POETRY_VERSION=1.1.0a3
+ ---> Using cache
+ ---> f7c96158a19c
+Step 3/6 : WORKDIR /srv
+ ---> Using cache
+ ---> d6d5ee3f8607
+Step 4/6 : RUN pip install "poetry==$POETRY_VERSION"
+ ---> Using cache
+ ---> a62d3e03ad62
+Step 5/6 : COPY . .
+ ---> d497c8b51af8
+Step 6/6 : RUN poetry install -vvv
+ ---> Running in 5ce5fc01de98
+Creating virtualenv poetry-grpcio-issue-o9msT97p-py3.6 in /root/.cache/pypoetry/virtualenvs
+Using virtualenv: /root/.cache/pypoetry/virtualenvs/poetry-grpcio-issue-o9msT97p-py3.6
+Updating dependencies
+Resolving dependencies...
+   1: fact: poetry-grpcio-issue is 0.1.0
+   1: derived: poetry-grpcio-issue
+   1: fact: poetry-grpcio-issue depends on grpcio (^1.30.0)
+   1: selecting poetry-grpcio-issue (0.1.0)
+   1: derived: grpcio (^1.30.0)
+   1: fact: grpcio (1.30.0) depends on six (>=1.5.2)
+   1: selecting grpcio (1.30.0)
+   1: derived: six (>=1.5.2)
+   1: selecting six (1.15.0)
+   1: Version solving took 0.862 seconds.
+   1: Tried 1 solutions.
+
+Writing lock file
+
+Finding the necessary packages for the current system
+
+Package operations: 2 installs, 0 updates, 0 removals
+
+  • Installing six (1.15.0)
+  • Installing grpcio (1.30.0)
+
+  Stack trace:
+
+  7  /usr/local/lib/python3.6/site-packages/poetry/installation/executor.py:181 in _execute_operation
+      179│
+      180│             try:
+    → 181│                 result = self._do_execute_operation(operation)
+      182│             except EnvCommandError as e:
+      183│                 if e.e.returncode == -2:
+
+  6  /usr/local/lib/python3.6/site-packages/poetry/installation/executor.py:255 in _do_execute_operation
+      253│             return 0
+      254│
+    → 255│         result = getattr(self, "_execute_{}".format(method))(operation)
+      256│
+      257│         if result != 0:
+
+  5  /usr/local/lib/python3.6/site-packages/poetry/installation/executor.py:392 in _execute_install
+      390│
+      391│     def _execute_install(self, operation):  # type: (Install) -> None
+    → 392│         return self._install(operation)
+      393│
+      394│     def _execute_update(self, operation):  # type: (Update) -> None
+
+  4  /usr/local/lib/python3.6/site-packages/poetry/installation/executor.py:430 in _install
+      428│             args.insert(2, "-U")
+      429│
+    → 430│         return self.run_pip(*args)
+      431│
+      432│     def _update(self, operation):
+
+  3  /usr/local/lib/python3.6/site-packages/poetry/installation/executor.py:281 in run_pip
+      279│     def run_pip(self, *args, **kwargs):  # type: (...) -> int
+      280│         try:
+    → 281│             self._env.run("python", "-m", "pip", *args, **kwargs)
+      282│         except EnvCommandError as e:
+      283│             output = decode(e.e.output)
+
+  2  /usr/local/lib/python3.6/site-packages/poetry/utils/env.py:900 in run
+       898│         bin = self._bin(bin)
+       899│         cmd = [bin] + list(args)
+    →  900│         return self._run(cmd, **kwargs)
+       901│
+       902│     def run_pip(self, *args, **kwargs):
+
+  1  /usr/local/lib/python3.6/site-packages/poetry/utils/env.py:1173 in _run
+      1171│             self.unset_env("__PYVENV_LAUNCHER__")
+      1172│
+    → 1173│             return super(VirtualEnv, self)._run(cmd, **kwargs)
+      1174│
+      1175│     def execute(self, bin, *args, **kwargs):
+
+  EnvCommandError
+
+  Command ['/root/.cache/pypoetry/virtualenvs/poetry-grpcio-issue-o9msT97p-py3.6/bin/python', '-m', 'pip', 'install', '--no-deps', '/root/.cache/pypoetry/artifacts/e4/1a/fb/cc14443ebcdd3b0d5df7ca7fbffdc7d9343564703a67906925174cd179/grpcio-1.30.0-cp36-cp36m-manylinux2010_x86_64.whl'] errored with the following return code 1, and output:
+  grpcio-1.30.0-cp36-cp36m-manylinux2010_x86_64.whl is not a supported wheel on this platform.
+  You are using pip version 18.1, however version 20.2b1 is available.
+  You should consider upgrading via the 'pip install --upgrade pip' command.
+
+
+  at /usr/local/lib/python3.6/site-packages/poetry/utils/env.py:937 in _run
+       933│                 output = subprocess.check_output(
+       934│                     cmd, stderr=subprocess.STDOUT, **kwargs
+       935│                 )
+       936│         except CalledProcessError as e:
+    →  937│             raise EnvCommandError(e, input=input_)
+       938│
+       939│         return decode(output)
+       940│
+       941│     def execute(self, bin, *args, **kwargs):
+
+The command '/bin/sh -c poetry install -vvv' returned a non-zero code: 1
