@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "poetry-grpcio-issue"
+version = "0.1.0"
+description = ""
+authors = ["Łukasz Czapliński <lczaplinski@opera.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+grpcio = "^1.30.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
