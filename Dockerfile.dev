@@ -1,0 +1,9 @@
+FROM python:3.6
+
+WORKDIR /srv
+
+RUN pip install git+https://github.com/python-poetry/poetry.git@develop
+
+COPY . .
+
+RUN poetry install -vvv
